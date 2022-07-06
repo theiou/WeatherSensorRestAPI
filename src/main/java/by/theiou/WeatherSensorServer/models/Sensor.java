@@ -3,6 +3,7 @@ package by.theiou.WeatherSensorServer.models;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
