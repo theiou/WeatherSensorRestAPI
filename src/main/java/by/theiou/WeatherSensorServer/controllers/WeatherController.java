@@ -27,6 +27,11 @@ public class WeatherController {
         return weatherService.getAllMeasurements();
     }
 
+    @GetMapping("/rainyDaysCount")
+    public int getRainyDaysCount(){
+        return weatherService.getRainyDaysCount();
+    }
+
     private Weather convertToWeather(WeatherDTO weatherDTO){
         Weather weather = new Weather();
         weather.setValue(weatherDTO.getValue());

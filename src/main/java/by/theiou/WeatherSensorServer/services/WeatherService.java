@@ -21,6 +21,10 @@ public class WeatherService {
         weatherRepository.save(weather);
     }
 
+    public int getRainyDaysCount(){
+       return weatherRepository.countByRaining("true");
+    }
+
     public List<Weather> getAllMeasurements(){
         return weatherRepository.findAll();
     }
