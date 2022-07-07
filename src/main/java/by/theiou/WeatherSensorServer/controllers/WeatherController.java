@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,8 +41,27 @@ public class WeatherController {
     }
 
     @GetMapping
-    public List<Weather> getAllMeasurements(){
-        return weatherService.getAllMeasurements();
+    public List<WeatherDTO> getAllMeasurements(){
+        List<Weather> listWeather = weatherService.getAllMeasurements();
+        List<WeatherDTO> listWeatherDTO = new ArrayList<>();
+        for (Weather weather : listWeather) {
+            listWeatherDTO.add(convertToWeatherDTO(weather));
+        }
+        return listWeatherDTO;
+    }
+
+    private WeatherDTO convertToWeatherDTO(Weather weather){
+        WeatherDTO weatherDTO = new WeatherDTO();
+        weatherDTO.setValue(weather.getValue());
+        weatherDTO.setRaining(weather.getRaining());
+        weatherDTO.setSensor(convertToSensorDTO(weather.getSensor()));
+        return weatherDTO;
+    }
+
+    private SensorDTO convertToSensorDTO(Sensor sensor){
+        SensorDTO sensorDTO = new SensorDTO();
+        sensorDTO.setName(sensor.getName());
+        return sensorDTO;
     }
 
     @GetMapping("/rainyDaysCount")
