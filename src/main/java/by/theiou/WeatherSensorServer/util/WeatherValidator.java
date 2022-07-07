@@ -25,5 +25,8 @@ public class WeatherValidator implements Validator {
         if (sensorsService.findByName(weather.getSensor().getName()) == null){
             errors.rejectValue("sensor", "", "There is no such sensor");
         }
+
+        if (weather.getRaining() != "true" || weather.getRaining() != "false")
+            errors.rejectValue("raining", "", "There's only true or false value here");
     }
 }
