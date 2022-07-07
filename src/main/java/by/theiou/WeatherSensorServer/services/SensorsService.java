@@ -15,8 +15,7 @@ public class SensorsService {
     SensorsRepository sensorsRepository;
 
     public void save(Sensor sensor){
-        enrichSensor(sensor);
-        sensorsRepository.save(sensor);
+        sensorsRepository.save(enrichSensor(sensor));
     }
 
     private Sensor enrichSensor(Sensor sensor){

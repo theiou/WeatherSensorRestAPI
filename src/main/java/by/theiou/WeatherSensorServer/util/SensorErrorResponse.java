@@ -14,6 +14,4 @@ public class SensorErrorResponse {
     public void setMessage(String message) {
         this.message = message;
     }
-
-
 }

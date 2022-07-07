@@ -33,7 +33,7 @@ public class WeatherController {
         Weather weatherToAdd = convertToWeather(weatherDTO);
         weatherValidator.validate(weatherToAdd, bindingResult);
         if (bindingResult.hasErrors())
-            returnAllErrors(bindingResult);
+            returnErrorsToClient(bindingResult);
 
         weatherService.save(weatherToAdd);
         return ResponseEntity.ok(HttpStatus.OK);
@@ -69,7 +69,7 @@ public class WeatherController {
         return sensor;
     }
 
-    private void returnAllErrors(BindingResult bindingResult){
+    private void returnErrorsToClient(BindingResult bindingResult){
         StringBuilder errorMessage = new StringBuilder();
         List<FieldError> errors = bindingResult.getFieldErrors();
         for (FieldError error : errors){

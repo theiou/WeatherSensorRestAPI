@@ -28,10 +28,27 @@ public class SensorsController {
     public ResponseEntity<HttpStatus> sensorRegistration(@RequestBody @Valid SensorDTO sensorDTO, BindingResult bindingResult) {
         sensorValidator.validate(convertToSensor(sensorDTO), bindingResult);
         if (bindingResult.hasErrors())
-            returnAllErrors(bindingResult);
+            returnErrorsToClient(bindingResult);
 
         sensorsService.save(convertToSensor(sensorDTO));
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    private void returnErrorsToClient(BindingResult bindingResult){
+        StringBuilder errorMessage = new StringBuilder();
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors){
+            errorMessage.append(error.getField())
+                    .append(" - ")
+                    .append(error.getDefaultMessage())
+                    .append(";");}
+
+        throw new SensorBadNameException(errorMessage.toString());
+    }
+    @ExceptionHandler
+    private ResponseEntity<SensorErrorResponse> handleException(SensorBadNameException e){
+        SensorErrorResponse response = new SensorErrorResponse(e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping
@@ -45,20 +62,7 @@ public class SensorsController {
         return sensor;
     }
 
-    @ExceptionHandler
-    private ResponseEntity<SensorErrorResponse> handleException(SensorBadNameException e){
-        SensorErrorResponse response = new SensorErrorResponse(e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
 
-    private void returnAllErrors(BindingResult bindingResult){
-        StringBuilder errorMessage = new StringBuilder();
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors){
-            errorMessage.append(error.getField()).append(" - ").append(error.getDefaultMessage()).append(";");}
-
-        throw new SensorBadNameException(errorMessage.toString());
-    }
 
 
 }

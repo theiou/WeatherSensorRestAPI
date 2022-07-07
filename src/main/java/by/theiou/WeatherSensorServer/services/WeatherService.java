@@ -16,8 +16,7 @@ public class WeatherService {
     WeatherRepository weatherRepository;
 
     public void save(Weather weather){
-        enrichWeather(weather);
-        weatherRepository.save(weather);
+        weatherRepository.save(enrichWeather(weather));
     }
 
     private Weather enrichWeather(Weather weather){
