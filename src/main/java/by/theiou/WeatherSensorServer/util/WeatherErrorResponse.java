@@ -3,6 +3,10 @@ package by.theiou.WeatherSensorServer.util;
 public class WeatherErrorResponse {
     private String msg;
 
+    public WeatherErrorResponse(String msg) {
+        this.msg = msg;
+    }
+
     public String getMsg() {
         return msg;
     }
@@ -11,7 +15,5 @@ public class WeatherErrorResponse {
         this.msg = msg;
     }
 
-    public WeatherErrorResponse(String msg) {
-        this.msg = msg;
-    }
+
 }

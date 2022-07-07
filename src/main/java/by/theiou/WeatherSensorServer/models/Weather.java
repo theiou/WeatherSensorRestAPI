@@ -1,7 +1,5 @@
 package by.theiou.WeatherSensorServer.models;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -25,6 +23,16 @@ public class Weather {
     @ManyToOne
     @JoinColumn(name = "sensor_name", referencedColumnName = "name")
     private Sensor sensor;
+
+    public Weather() {
+    }
+
+    public Weather(double value, String raining, LocalDateTime createdAt, Sensor sensor) {
+        this.value = value;
+        this.raining = raining;
+        this.createdAt = createdAt;
+        this.sensor = sensor;
+    }
 
     public Integer getId() {
         return id;
@@ -58,8 +66,7 @@ public class Weather {
         this.createdAt = createdAt;
     }
 
-    public Weather() {
-    }
+
 
     public Sensor getSensor() {
         return sensor;
@@ -69,10 +76,5 @@ public class Weather {
         this.sensor = sensor;
     }
 
-    public Weather(double value, String raining, LocalDateTime createdAt, Sensor sensor) {
-        this.value = value;
-        this.raining = raining;
-        this.createdAt = createdAt;
-        this.sensor = sensor;
-    }
+
 }

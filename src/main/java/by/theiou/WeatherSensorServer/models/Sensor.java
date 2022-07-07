@@ -1,9 +1,6 @@
 package by.theiou.WeatherSensorServer.models;
 
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +19,8 @@ public class Sensor implements Serializable{
     @Transient
     private List<Weather> values;
 
+    public Sensor() {
+    }
     public Sensor(String name, LocalDateTime createdAt, List<Weather> values) {
         this.name = name;
         this.createdAt = createdAt;
@@ -52,6 +51,5 @@ public class Sensor implements Serializable{
         this.values = values;
     }
 
-    public Sensor() {
-    }
+
 }

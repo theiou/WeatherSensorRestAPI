@@ -2,7 +2,6 @@ package by.theiou.WeatherSensorServer.util;
 
 import by.theiou.WeatherSensorServer.models.Weather;
 import by.theiou.WeatherSensorServer.services.SensorsService;
-import by.theiou.WeatherSensorServer.services.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

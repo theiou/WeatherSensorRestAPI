@@ -6,6 +6,13 @@ public class SensorDTO {
     @Size(min = 3, max = 20, message = "Name of the sensor should be between 1 and 20 characters")
     private String name;
 
+    public SensorDTO() {
+    }
+
+    public SensorDTO(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
@@ -14,10 +21,5 @@ public class SensorDTO {
         this.name = name;
     }
 
-    public SensorDTO(String name) {
-        this.name = name;
-    }
 
-    public SensorDTO() {
-    }
 }

@@ -1,6 +1,5 @@
 package by.theiou.WeatherSensorServer.dto;
 
-import by.theiou.WeatherSensorServer.models.Sensor;
 import org.hibernate.validator.constraints.Range;
 
 public class WeatherDTO {
@@ -8,6 +7,15 @@ public class WeatherDTO {
     private double value;
     private String raining;
     private SensorDTO sensor;
+
+    public WeatherDTO() {
+    }
+
+    public WeatherDTO(double value, String raining, SensorDTO sensor) {
+        this.value = value;
+        this.raining = raining;
+        this.sensor = sensor;
+    }
 
     public double getValue() {
         return value;

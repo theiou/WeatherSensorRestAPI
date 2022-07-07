@@ -4,7 +4,6 @@ import by.theiou.WeatherSensorServer.models.Weather;
 import by.theiou.WeatherSensorServer.repositories.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,6 +32,5 @@ public class WeatherService {
     public List<Weather> getAllMeasurements(){
         return weatherRepository.findAll();
     }
-
 
 }

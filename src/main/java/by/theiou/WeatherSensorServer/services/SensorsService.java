@@ -19,6 +19,11 @@ public class SensorsService {
         sensorsRepository.save(sensor);
     }
 
+    private Sensor enrichSensor(Sensor sensor){
+        sensor.setCreatedAt(LocalDateTime.now());
+        return sensor;
+    }
+
     public Sensor findByName(String name){
         return sensorsRepository.findByName(name).orElse(null);
     }
@@ -27,10 +32,4 @@ public class SensorsService {
         System.out.println(sensorsRepository.findAll());
         return sensorsRepository.findAll();
     }
-
-    private Sensor enrichSensor(Sensor sensor){
-        sensor.setCreatedAt(LocalDateTime.now());
-        return sensor;
-    }
-
 }
