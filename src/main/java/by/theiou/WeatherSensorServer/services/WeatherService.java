@@ -21,6 +21,11 @@ public class WeatherService {
         weatherRepository.save(weather);
     }
 
+    private Weather enrichWeather(Weather weather){
+        weather.setCreatedAt(LocalDateTime.now());
+        return weather;
+    }
+
     public int getRainyDaysCount(){
        return weatherRepository.countByRaining("true");
     }
@@ -29,8 +34,5 @@ public class WeatherService {
         return weatherRepository.findAll();
     }
 
-    private Weather enrichWeather(Weather weather){
-        weather.setCreatedAt(LocalDateTime.now());
-        return weather;
-    }
+
 }

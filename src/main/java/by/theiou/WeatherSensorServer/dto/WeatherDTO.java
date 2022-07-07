@@ -1,11 +1,13 @@
 package by.theiou.WeatherSensorServer.dto;
 
 import by.theiou.WeatherSensorServer.models.Sensor;
+import org.hibernate.validator.constraints.Range;
 
 public class WeatherDTO {
+    @Range(min = -100, max = 100, message = "Value should be in range [-100; 100]")
     private double value;
     private String raining;
-    private Sensor sensor;
+    private SensorDTO sensor;
 
     public double getValue() {
         return value;
@@ -23,11 +25,11 @@ public class WeatherDTO {
         this.raining = raining;
     }
 
-    public Sensor getSensor() {
+    public SensorDTO getSensor() {
         return sensor;
     }
 
-    public void setSensor(Sensor sensor) {
+    public void setSensor(SensorDTO sensor) {
         this.sensor = sensor;
     }
 }

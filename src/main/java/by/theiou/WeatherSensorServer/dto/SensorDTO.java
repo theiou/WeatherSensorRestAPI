@@ -14,4 +14,10 @@ public class SensorDTO {
         this.name = name;
     }
 
+    public SensorDTO(String name) {
+        this.name = name;
+    }
+
+    public SensorDTO() {
+    }
 }
