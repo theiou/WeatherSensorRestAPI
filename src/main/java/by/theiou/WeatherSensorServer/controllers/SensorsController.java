@@ -6,6 +6,7 @@ import by.theiou.WeatherSensorServer.services.SensorsService;
 import by.theiou.WeatherSensorServer.util.SensorBadNameException;
 import by.theiou.WeatherSensorServer.util.SensorErrorResponse;
 import by.theiou.WeatherSensorServer.util.SensorValidator;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class SensorsController {
     SensorsService sensorsService;
     @Autowired
     SensorValidator sensorValidator;
+
+    @Autowired
+    ModelMapper modelMapper;
 
     @PostMapping("/registration")
     public ResponseEntity<HttpStatus> sensorRegistration(@RequestBody @Valid SensorDTO sensorDTO, BindingResult bindingResult) {
@@ -57,12 +61,6 @@ public class SensorsController {
     }
 
     private Sensor convertToSensor(SensorDTO sensorDTO){
-        Sensor sensor = new Sensor();
-        sensor.setName(sensorDTO.getName());
-        return sensor;
+        return modelMapper.map(sensorDTO, Sensor.class);
     }
-
-
-
-
 }

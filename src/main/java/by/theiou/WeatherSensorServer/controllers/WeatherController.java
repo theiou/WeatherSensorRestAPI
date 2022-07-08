@@ -8,9 +8,11 @@ import by.theiou.WeatherSensorServer.services.WeatherService;
 import by.theiou.WeatherSensorServer.util.WeatherErrorResponse;
 import by.theiou.WeatherSensorServer.util.WeatherNoSensorException;
 import by.theiou.WeatherSensorServer.util.WeatherValidator;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,9 @@ public class WeatherController {
 
     @Autowired
     WeatherValidator weatherValidator;
+
+    @Autowired
+    ModelMapper modelMapper;
 
 
     @PostMapping("/add")
@@ -51,17 +56,11 @@ public class WeatherController {
     }
 
     private WeatherDTO convertToWeatherDTO(Weather weather){
-        WeatherDTO weatherDTO = new WeatherDTO();
-        weatherDTO.setValue(weather.getValue());
-        weatherDTO.setRaining(weather.getRaining());
-        weatherDTO.setSensor(convertToSensorDTO(weather.getSensor()));
-        return weatherDTO;
+        return modelMapper.map(weather, WeatherDTO.class);
     }
 
-    private SensorDTO convertToSensorDTO(Sensor sensor){
-        SensorDTO sensorDTO = new SensorDTO();
-        sensorDTO.setName(sensor.getName());
-        return sensorDTO;
+    private Weather convertToWeather(WeatherDTO weatherDTO){
+        return modelMapper.map(weatherDTO, Weather.class);
     }
 
     @GetMapping("/rainyDaysCount")
@@ -73,20 +72,6 @@ public class WeatherController {
     private ResponseEntity<WeatherErrorResponse> handleException(WeatherNoSensorException e){
         WeatherErrorResponse response = new WeatherErrorResponse(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    private Weather convertToWeather(WeatherDTO weatherDTO){
-        Weather weather = new Weather();
-        weather.setValue(weatherDTO.getValue());
-        weather.setRaining(weatherDTO.getRaining());
-        weather.setSensor(convertToSensor(weatherDTO.getSensor()));
-        return weather;
-    }
-
-    private Sensor convertToSensor(SensorDTO sensorDTO){
-        Sensor sensor = new Sensor();
-        sensor.setName(sensorDTO.getName());
-        return sensor;
     }
 
     private void returnErrorsToClient(BindingResult bindingResult){

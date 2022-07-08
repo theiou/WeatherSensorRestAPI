@@ -25,7 +25,7 @@ public class WeatherValidator implements Validator {
             errors.rejectValue("sensor", "", "There is no such sensor");
         }
 
-        if (!weather.getRaining().equals("true") || !weather.getRaining().equals("false"))
+        if (!weather.getRaining().equals("true") && !weather.getRaining().equals("false"))
             errors.rejectValue("raining", "", "There's only true or false value here");
     }
 }
