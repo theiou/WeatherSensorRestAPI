@@ -1,8 +1,6 @@
 package by.theiou.WeatherSensorServer.controllers;
 
-import by.theiou.WeatherSensorServer.dto.SensorDTO;
 import by.theiou.WeatherSensorServer.dto.WeatherDTO;
-import by.theiou.WeatherSensorServer.models.Sensor;
 import by.theiou.WeatherSensorServer.models.Weather;
 import by.theiou.WeatherSensorServer.services.WeatherService;
 import by.theiou.WeatherSensorServer.util.WeatherErrorResponse;
@@ -12,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -82,8 +79,4 @@ public class WeatherController {
 
         throw new WeatherNoSensorException(errorMessage.toString());
     }
-
-
-
-
 }
